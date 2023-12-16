@@ -13,7 +13,7 @@ jobs:
   test:
     runs-on: windows-latest
     env:
-      targetZip: ${{ github.event.repository.name }}-${{ github.ref_name }}-arm-compiler-for-embedded-6.19.zip
+      targetZip: ${{ github.event.repository.name }}-${{ github.ref_name }}-keil-mdk-v5.38a.zip
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,11 +58,6 @@ jobs:
           set CURRENT_DIRECTORY=%CD%
           cd ${{ github.repository }} && "%CURRENT_DIRECTORY%\keil-mdk-v5.38a-portable\UV4.Portable.exe" --project=EIE3105_STM32F103RB_Application.uvprojx &&^
           dir
-
-      - shell: cmd
-        run: |
-          set CURRENT_DIRECTORY=%CD%
-          cd ${{ github.repository }} && dir /s && cd Objects && "%CURRENT_DIRECTORY%\keil-mdk-v5.38a-portable\ARM\ARMCLANG\bin\armclang.exe" --version > ARMCLANG_VERSION.txt
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
